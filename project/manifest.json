@@ -2,13 +2,11 @@
   "manifest_version": 3,
   "name": "Vault Keys",
   "version": "1.0",
-  "description": "Gestor de contraseñas Zero-Knowledge y Offline-First.",
+  "description": "Gestor de contraseñas seguro",
   "permissions": [
-    "storage",
-    "privacy"
+    "storage"
   ],
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "Abrir Vault Keys"
+    "default_popup": "popup.html"
   }
 }
