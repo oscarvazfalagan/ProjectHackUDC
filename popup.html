@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 320px; padding: 20px; font-family: system-ui, sans-serif; background-color: #1A1A24; color: #FFFFFF; margin: 0; }
+    h2 { text-align: center; color: #E0E0E6; margin-top: 0; cursor: pointer; user-select: none; }
+    input { width: 100%; padding: 12px; margin-bottom: 10px; box-sizing: border-box; text-align: center; font-size: 16px; font-family: monospace; background-color: #262635; color: #A370F7; border: 1px solid #3E3E55; border-radius: 6px; }
+    button { width: 100%; padding: 12px; margin-bottom: 10px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .btn-primario { background-color: #6D4AFF; color: white; }
+    .btn-primario:hover { background-color: #5B3DE6; }
+    .btn-secundario { background-color: #262635; color: #E0E0E6; border: 1px solid #3E3E55; }
+    .btn-secundario:hover { background-color: #3E3E55; }
+    #boveda { margin-top: 20px; border-top: 1px solid #3E3E55; padding-top: 10px; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { background: #262635; padding: 10px; margin-bottom: 5px; border-radius: 4px; color: #A370F7; font-family: monospace; }
+  </style>
+</head>
+<body>
+
+  <h2 id="tituloSecreto" title="Doble clic para resetear">🛡️ Gradiant PassVault</h2>
+  
+  <div id="pantallaRegistro" style="display: none;">
+    <p style="text-align: center; font-size: 13px; color: #8C8C9A;">¡Bienvenido! Crea tu contraseña maestra.</p>
+    <input type="password" id="inputNuevaMaestra" placeholder="Nueva contraseña">
+    <input type="password" id="inputRepetirMaestra" placeholder="Repite la contraseña">
+    <button id="btnRegistrar" class="btn-primario">Guardar y Entrar</button>
+  </div>
+
+  <div id="pantallaLogin" style="display: none;">
+    <p style="text-align: center; font-size: 13px; color: #8C8C9A;">Introduce tu Contraseña Maestra</p>
+    <input type="password" id="inputMaestra" placeholder="••••••••">
+    <button id="btnDesbloquear" class="btn-primario">Desbloquear</button>
+  </div>
+
+  <div id="pantallaBoveda" style="display: none;">
+    <input type="text" id="cajaContrasena" placeholder="Pulsa generar..." readonly>
+    <button id="botonGenerar" class="btn-primario">1. Generar Contraseña Segura</button>
+    <button id="botonGuardar" class="btn-secundario">2. Guardar en Bóveda</button>
+    <div id="boveda">
+      <p style="font-size: 12px; color: #8C8C9A;">CONTRASEÑAS GUARDADAS:</p>
+      <ul id="listaContrasenas"></ul>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

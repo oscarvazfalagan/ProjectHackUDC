@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Gradiant PassVault",
+  "version": "1.0",
+  "description": "Gestor universal de contraseñas",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
