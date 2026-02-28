@@ -14,7 +14,18 @@
       box-sizing: border-box;
     }
     
-    /* Título (Huevo de pascua ninja) */
+    /* Contenedor del Logo */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .logo-img {
+      width: 64px; 
+      height: auto;
+      border-radius: 12px;
+    }
+
+    /* Título y Subtítulo */
     h2 { 
       text-align: center; 
       color: #E0E0E6; 
@@ -32,7 +43,7 @@
       letter-spacing: 1px; 
     }
 
-    /* --- PANTALLA DE BIENVENIDA Y BOTONES SÍ/NO --- */
+    /* --- PANTALLAS Y BOTONES --- */
     .pregunta-container { text-align: center; }
     .texto-pregunta { font-size: 15px; color: #8C8C9A; margin-bottom: 20px; }
     
@@ -67,23 +78,28 @@
 
     .subtexto-btn { font-size: 10px; font-weight: normal; margin-top: 5px; text-transform: uppercase; opacity: 0.8; }
 
-    /* --- INPUTS Y RESTO DE BOTONES --- */
+    /* --- INPUTS --- */
     .oculto { display: none; }
     input { 
       width: 100%; padding: 12px; margin-bottom: 12px; box-sizing: border-box; text-align: center; 
-      background-color: #1C1C28; color: #A370F7; border: 1px solid #3E3E55; border-radius: 8px; outline: none; 
+      background-color: #1C1C28; color: #A370F7; border: 1px solid #3E3E55; 
+      border-radius: 10px; 
+      outline: none; 
     }
     input:focus { border-color: #6D4AFF; }
     
     .btn-accion { 
-      width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; 
+      width: 100%; padding: 14px; border: none; 
+      border-radius: 10px; 
+      font-weight: bold; 
       cursor: pointer; background-color: #6D4AFF; color: white; transition: 0.2s; 
     }
     .btn-accion:hover { background-color: #5B3DE6; }
     
     /* --- BÓVEDA --- */
     li { 
-      background: #1C1C28; padding: 10px; margin-bottom: 6px; border-radius: 6px; 
+      background: #1C1C28; padding: 12px; margin-bottom: 8px; 
+      border-radius: 10px; 
       color: #A370F7; font-family: monospace; border-left: 3px solid #6D4AFF; 
       list-style: none; font-size: 13px; 
     }
@@ -95,10 +111,14 @@
 </head>
 <body>
 
+  <div class="logo-container">
+    <img src="./imagenes/logoMainPage.png" alt="VAULT KEYS LOGO" class="logo-img">
+  </div>
+
   <h2 id="btnResetTotal" title=" ">VAULT KEYS</h2>
   <div class="subtitulo-logo">SEGURIDAD CRIPTOGRÁFICA</div>
 
-  <div id="bannerPredeterminado" style="background: rgba(109, 74, 255, 0.15); border: 1px solid #6D4AFF; border-radius: 8px; padding: 12px; margin-bottom: 20px; text-align: center; display: none;">
+  <div id="bannerPredeterminado" style="background: rgba(109, 74, 255, 0.15); border: 1px solid #6D4AFF; border-radius: 10px; padding: 12px; margin-bottom: 20px; text-align: center; display: none;">
     <p style="font-size: 12px; margin: 0 0 10px 0; color: #E0E0E6;">¿Establecer Vault Keys como tu gestor principal?</p>
     <div style="display: flex; gap: 10px;">
       <button id="btnAceptarPredeterminado" style="flex: 1; background: #6D4AFF; color: white; border: none; border-radius: 6px; padding: 6px; font-weight: bold; cursor: pointer;">Aceptar</button>
@@ -119,15 +139,16 @@
   </div>
 
   <div id="pantallaRegistro" class="oculto">
-    <input type="text" id="regUsuario" placeholder="Usuario">
+    <input type="email" id="regEmail" placeholder="Correo electrónico">
+    <input type="text" id="regNombre" placeholder="Nombre completo">
     <input type="password" id="regPass" placeholder="Clave Maestra">
-    <input type="password" id="regPassRepetir" placeholder="Repite clave">
+    <input type="password" id="regPassRepetir" placeholder="Repite clave maestra">
     <button id="btnRegistrar" class="btn-accion">CREAR CUENTA</button>
     <span id="volverBienvenidaReg" class="link-volver">← Volver al inicio</span>
   </div>
 
   <div id="pantallaLogin" class="oculto">
-    <input type="text" id="loginUsuario" placeholder="Usuario">
+    <input type="email" id="loginEmail" placeholder="Correo electrónico">
     <input type="password" id="loginPass" placeholder="Contraseña">
     <button id="btnDesbloquear" class="btn-accion">DESBLOQUEAR</button>
     <span id="volverBienvenidaLog" class="link-volver">← Volver al inicio</span>
@@ -137,7 +158,9 @@
     <p id="saludo" style="font-size: 12px; color: #6D4AFF; margin-bottom: 12px; text-align: center;"></p>
     
     <input type="text" id="siteName" placeholder="Nombre de la Web">
-    <input type="text" id="siteUser" placeholder="Usuario / Email">
+    
+    <input type="text" id="siteUser" placeholder="Usuario">
+    <input type="email" id="siteEmail" placeholder="Email">
     
     <input type="text" id="cajaContrasena" placeholder="Click en generar..." readonly>
     
@@ -146,7 +169,7 @@
       <button id="botonGenerarIA" class="btn-accion" style="margin-bottom: 0; background-color: #00C853;">AVANZADO (API)</button>
     </div>
 
-    <button id="botonGuardar" style="background:transparent; color:#E0E0E6; border:1px solid #3E3E55; margin-top:8px; width:100%; padding:10px; border-radius:8px; cursor:pointer;">GUARDAR EN MI LISTA</button>
+    <button id="botonGuardar" style="background:transparent; color:#E0E0E6; border:1px solid #3E3E55; margin-top:8px; width:100%; padding:10px; border-radius:10px; cursor:pointer;">GUARDAR EN MI LISTA</button>
     
     <div id="boveda" style="margin-top:20px;">
       <ul id="listaContrasenas" style="padding:0;"></ul>
