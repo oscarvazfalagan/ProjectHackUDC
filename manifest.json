@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Vault Keys",
+  "version": "1.0",
+  "description": "Gestor de contraseñas seguro con inyección automática.",
+  "icons": {
+    "16": "./imagenes/mainlogo.png",
+    "48": "./imagenes/48x48icono.png",
+    "128": "./imagenes/128x128icon.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "privacy"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./imagenes/mainlogo.png",
+      "48": "./imagenes/48x48icono.png",
+      "128": "./imagenes/128x128icon.png"
+    }
+  }
+}

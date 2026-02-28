@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* Estilos generales y Reset */
+    body { 
+      width: 320px; 
+      padding: 25px; 
+      font-family: 'Segoe UI', sans-serif; 
+      background-color: #12121A; 
+      color: #FFFFFF; 
+      margin: 0; 
+      box-sizing: border-box;
+    }
+    
+    /* Contenedor del Logo */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .logo-img {
+      width: 64px; 
+      height: auto;
+      border-radius: 12px;
+    }
+
+    /* Título y Subtítulo */
+    h2 { 
+      text-align: center; 
+      color: #E0E0E6; 
+      margin-bottom: 5px; 
+      letter-spacing: 3px; 
+      user-select: none; 
+      cursor: default; 
+    }
+    .subtitulo-logo { 
+      text-align: center; 
+      font-size: 10px; 
+      color: #6D4AFF; 
+      margin-bottom: 20px; 
+      font-weight: bold; 
+      letter-spacing: 1px; 
+    }
+
+    /* --- PANTALLAS Y BOTONES --- */
+    .pregunta-container { text-align: center; }
+    .texto-pregunta { font-size: 15px; color: #8C8C9A; margin-bottom: 20px; }
+    
+    .fila-botones { 
+      display: flex; 
+      flex-direction: row; 
+      justify-content: space-between; 
+      gap: 15px; 
+      width: 100%; 
+    }
+    
+    .btn-opcion {
+      flex: 1; 
+      padding: 20px 0; 
+      border-radius: 12px; 
+      font-size: 20px; 
+      font-weight: 800;
+      cursor: pointer; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .btn-si { background-color: rgba(109, 74, 255, 0.1); color: #6D4AFF; border-color: #6D4AFF; }
+    .btn-si:hover { background-color: #6D4AFF; color: white; transform: scale(1.05); }
+
+    .btn-no { background-color: rgba(0, 200, 83, 0.1); color: #00C853; border-color: #00C853; }
+    .btn-no:hover { background-color: #00C853; color: white; transform: scale(1.05); }
+
+    .subtexto-btn { font-size: 10px; font-weight: normal; margin-top: 5px; text-transform: uppercase; opacity: 0.8; }
+
+    /* --- INPUTS --- */
+    .oculto { display: none; }
+    input { 
+      width: 100%; padding: 12px; margin-bottom: 12px; box-sizing: border-box; text-align: center; 
+      background-color: #1C1C28; color: #A370F7; border: 1px solid #3E3E55; 
+      border-radius: 10px; 
+      outline: none; 
+    }
+    input:focus { border-color: #6D4AFF; }
+    
+    .btn-accion { 
+      width: 100%; padding: 14px; border: none; 
+      border-radius: 10px; 
+      font-weight: bold; 
+      cursor: pointer; background-color: #6D4AFF; color: white; transition: 0.2s; 
+    }
+    .btn-accion:hover { background-color: #5B3DE6; }
+    
+    /* --- BÓVEDA --- */
+    li { 
+      background: #1C1C28; padding: 12px; margin-bottom: 8px; 
+      border-radius: 10px; 
+      color: #A370F7; font-family: monospace; border-left: 3px solid #6D4AFF; 
+      list-style: none; font-size: 13px; 
+    }
+    .link-volver { 
+      display: block; text-align: center; margin-top: 20px; font-size: 13px; 
+      color: #8C8C9A; cursor: pointer; text-decoration: underline; 
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="./imagenes/mainlogo.png" alt="VAULT KEYS LOGO" class="logo-img">
+  </div>
+
+  <h2 id="btnResetTotal" title=" ">VAULT KEYS</h2>
+  <div class="subtitulo-logo">SEGURIDAD CRIPTOGRÁFICA</div>
+
+  <div id="bannerPredeterminado" style="background: rgba(109, 74, 255, 0.15); border: 1px solid #6D4AFF; border-radius: 10px; padding: 12px; margin-bottom: 20px; text-align: center; display: none;">
+    <p style="font-size: 12px; margin: 0 0 10px 0; color: #E0E0E6;">¿Establecer Vault Keys como tu gestor principal?</p>
+    <div style="display: flex; gap: 10px;">
+      <button id="btnAceptarPredeterminado" style="flex: 1; background: #6D4AFF; color: white; border: none; border-radius: 6px; padding: 6px; font-weight: bold; cursor: pointer;">Aceptar</button>
+      <button id="btnIgnorarPredeterminado" style="flex: 1; background: transparent; color: #8C8C9A; border: 1px solid #3E3E55; border-radius: 6px; padding: 6px; cursor: pointer;">Más tarde</button>
+    </div>
+  </div>
+  
+  <div id="pantallaBienvenida" class="pregunta-container">
+    <div class="texto-pregunta">¿Ya tienes una cuenta?</div>
+    <div class="fila-botones">
+      <button id="btnIrALogin" class="btn-opcion btn-si">
+        SÍ <span class="subtexto-btn">Entrar</span>
+      </button>
+      <button id="btnIrARegistro" class="btn-opcion btn-no">
+        NO <span class="subtexto-btn">Crear</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="pantallaRegistro" class="oculto">
+    <input type="email" id="regEmail" placeholder="Correo electrónico">
+    <input type="text" id="regNombre" placeholder="Nombre completo">
+    <input type="password" id="regPass" placeholder="Clave Maestra">
+    <input type="password" id="regPassRepetir" placeholder="Repite clave maestra">
+    <button id="btnRegistrar" class="btn-accion">CREAR CUENTA</button>
+    <span id="volverBienvenidaReg" class="link-volver">← Volver al inicio</span>
+  </div>
+
+  <div id="pantallaLogin" class="oculto">
+    <input type="email" id="loginEmail" placeholder="Correo electrónico">
+    <input type="password" id="loginPass" placeholder="Contraseña">
+    <button id="btnDesbloquear" class="btn-accion">DESBLOQUEAR</button>
+    <span id="volverBienvenidaLog" class="link-volver">← Volver al inicio</span>
+  </div>
+
+  <div id="pantallaBoveda" class="oculto">
+    <p id="saludo" style="font-size: 18px; color: #FFFFFF; font-weight: 800; text-align: center; letter-spacing: 1px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #3E3E55; text-shadow: 0px 0px 10px rgba(109, 74, 255, 0.6);"></p>
+    
+    <input type="text" id="siteName" placeholder="Nombre de la Web">
+    
+    <input type="text" id="siteUser" placeholder="Usuario">
+    <input type="email" id="siteEmail" placeholder="Email">
+    
+    <input type="text" id="cajaContrasena" placeholder="Click en generar..." readonly>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+      <button id="botonGenerarNormal" class="btn-accion" style="margin-bottom: 0;">NORMAL</button>
+      <button id="botonGenerarIA" class="btn-accion" style="margin-bottom: 0; background-color: #00C853;">AVANZADO (API)</button>
+    </div>
+
+    <button id="botonGuardar" style="background:transparent; color:#E0E0E6; border:1px solid #3E3E55; margin-top:8px; width:100%; padding:10px; border-radius:10px; cursor:pointer;">GUARDAR EN MI LISTA</button>
+    
+    <div id="boveda" style="margin-top:20px;">
+      <ul id="listaContrasenas" style="padding:0;"></ul>
+    </div>
+    
+    <button id="btnLogOut" style="background:none; border:none; color:#8C8C9A; font-size:11px; width:100%; margin-top:20px; cursor:pointer; text-decoration: underline;">Cerrar sesión</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

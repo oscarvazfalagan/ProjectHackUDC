@@ -1,0 +1,10 @@
+# Ignorar el diccionari pesat per evitar errors de pujada a GitHub
+rockyou.txt
+
+# Ignorar fitxers de sistema o configuració local
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Si en el futur fas servir paquets de node
+node_modules/

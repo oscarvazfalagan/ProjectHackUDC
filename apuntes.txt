@@ -1,0 +1,9 @@
+[ ] 1. Dominio del Navegador: Lograr apagar el gestor nativo de Brave (Solucionar el problema de ejecutarlo como superusuario).
+
+[ ] 2. Validación Kaggle (Rockyou): Bloquear contraseñas filtradas en la pantalla de creación de cuenta.
+
+[ ] 3. Trampa de Aleatoriedad: Integrar la API de Random.org en el generador (con plan B criptográfico local por si falla la IP).
+
+[ ] 4. Generador IA (HuggingFace): Añadir un botón extra para crear contraseñas memorables usando el LLM de las bases.
+
+[ ] 5. Bóveda Avanzada: Cambiar el guardado simple para poder asociar cada contraseña a una Web y a un Usuario (ej: *google.com - paco@gmail.com - ********).
