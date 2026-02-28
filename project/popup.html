@@ -3,44 +3,101 @@
 <head>
   <meta charset="utf-8">
   <style>
-    body { width: 320px; padding: 20px; font-family: system-ui, sans-serif; background-color: #1A1A24; color: #FFFFFF; margin: 0; }
-    h2 { text-align: center; color: #E0E0E6; margin-top: 0; cursor: pointer; user-select: none; }
-    input { width: 100%; padding: 12px; margin-bottom: 10px; box-sizing: border-box; text-align: center; font-size: 16px; font-family: monospace; background-color: #262635; color: #A370F7; border: 1px solid #3E3E55; border-radius: 6px; }
-    button { width: 100%; padding: 12px; margin-bottom: 10px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    .btn-primario { background-color: #6D4AFF; color: white; }
-    .btn-primario:hover { background-color: #5B3DE6; }
-    .btn-secundario { background-color: #262635; color: #E0E0E6; border: 1px solid #3E3E55; }
-    .btn-secundario:hover { background-color: #3E3E55; }
-    #boveda { margin-top: 20px; border-top: 1px solid #3E3E55; padding-top: 10px; }
-    ul { list-style: none; padding: 0; margin: 0; }
-    li { background: #262635; padding: 10px; margin-bottom: 5px; border-radius: 4px; color: #A370F7; font-family: monospace; }
+    /* Estilos generales y Reset */
+    body { width: 320px; padding: 25px; font-family: 'Segoe UI', sans-serif; background-color: #12121A; color: #FFFFFF; margin: 0; }
+    
+    /* Título con efecto de reset */
+    h2 { 
+      text-align: center; 
+      color: #E0E0E6; 
+      margin-bottom: 5px; 
+      letter-spacing: 3px; 
+      cursor: pointer; 
+      user-select: none; 
+      transition: 0.3s;
+    }
+    h2:hover { color: #6D4AFF; }
+    .subtitulo-logo { text-align: center; font-size: 10px; color: #6D4AFF; margin-bottom: 30px; font-weight: bold; letter-spacing: 1px; }
+
+    /* Pantalla de Bienvenida (SÍ/NO) */
+    .pregunta-container { text-align: center; }
+    .texto-pregunta { font-size: 15px; color: #8C8C9A; margin-bottom: 20px; }
+    .fila-botones { display: flex; gap: 15px; }
+    
+    .btn-opcion {
+      flex: 1; padding: 25px 0; border-radius: 12px; font-size: 20px; font-weight: 800;
+      cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; 
+      align-items: center; border: 2px solid transparent;
+    }
+
+    /* Botón SÍ (Login) */
+    .btn-si { background-color: rgba(109, 74, 255, 0.1); color: #6D4AFF; border-color: #6D4AFF; }
+    .btn-si:hover { background-color: #6D4AFF; color: white; transform: scale(1.05); }
+
+    /* Botón NO (Registro) */
+    .btn-no { background-color: rgba(0, 200, 83, 0.1); color: #00C853; border-color: #00C853; }
+    .btn-no:hover { background-color: #00C853; color: white; transform: scale(1.05); }
+
+    .subtexto-btn { font-size: 10px; font-weight: normal; margin-top: 5px; text-transform: uppercase; opacity: 0.8; }
+
+    /* Inputs y botones de acción */
+    .oculto { display: none; }
+    input { 
+      width: 100%; padding: 12px; margin-bottom: 12px; box-sizing: border-box; text-align: center; 
+      background-color: #1C1C28; color: #A370F7; border: 1px solid #3E3E55; border-radius: 8px; outline: none; 
+    }
+    input:focus { border-color: #6D4AFF; }
+    .btn-accion { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background-color: #6D4AFF; color: white; transition: 0.2s; }
+    .btn-accion:hover { background-color: #5B3DE6; }
+    
+    /* Lista de la bóveda */
+    li { background: #1C1C28; padding: 10px; margin-bottom: 6px; border-radius: 6px; color: #A370F7; font-family: monospace; border-left: 3px solid #6D4AFF; list-style: none; font-size: 13px; }
+    .link-volver { display: block; text-align: center; margin-top: 20px; font-size: 13px; color: #8C8C9A; cursor: pointer; text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <h2 id="tituloSecreto" title="Doble clic para resetear">🛡️ Gradiant PassVault</h2>
+  <h2 id="btnResetTotal">VAULT KEYS</h2>
+  <div class="subtitulo-logo">SEGURIDAD CRIPTOGRÁFICA</div>
   
-  <div id="pantallaRegistro" style="display: none;">
-    <p style="text-align: center; font-size: 13px; color: #8C8C9A;">¡Bienvenido! Crea tu contraseña maestra.</p>
-    <input type="password" id="inputNuevaMaestra" placeholder="Nueva contraseña">
-    <input type="password" id="inputRepetirMaestra" placeholder="Repite la contraseña">
-    <button id="btnRegistrar" class="btn-primario">Guardar y Entrar</button>
-  </div>
-
-  <div id="pantallaLogin" style="display: none;">
-    <p style="text-align: center; font-size: 13px; color: #8C8C9A;">Introduce tu Contraseña Maestra</p>
-    <input type="password" id="inputMaestra" placeholder="••••••••">
-    <button id="btnDesbloquear" class="btn-primario">Desbloquear</button>
-  </div>
-
-  <div id="pantallaBoveda" style="display: none;">
-    <input type="text" id="cajaContrasena" placeholder="Pulsa generar..." readonly>
-    <button id="botonGenerar" class="btn-primario">1. Generar Contraseña Segura</button>
-    <button id="botonGuardar" class="btn-secundario">2. Guardar en Bóveda</button>
-    <div id="boveda">
-      <p style="font-size: 12px; color: #8C8C9A;">CONTRASEÑAS GUARDADAS:</p>
-      <ul id="listaContrasenas"></ul>
+  <div id="pantallaBienvenida" class="pregunta-container">
+    <div class="texto-pregunta">¿Ya tienes una cuenta?</div>
+    <div class="fila-botones">
+      <button id="btnIrALogin" class="btn-opcion btn-si">
+        SÍ <span class="subtexto-btn">Entrar</span>
+      </button>
+      <button id="btnIrARegistro" class="btn-opcion btn-no">
+        NO <span class="subtexto-btn">Crear</span>
+      </button>
     </div>
+  </div>
+
+  <div id="pantallaRegistro" class="oculto">
+    <input type="text" id="regUsuario" placeholder="Usuario">
+    <input type="password" id="regPass" placeholder="Clave Maestra">
+    <input type="password" id="regPassRepetir" placeholder="Repite clave">
+    <button id="btnRegistrar" class="btn-accion">CREAR CUENTA</button>
+    <span id="volverBienvenidaReg" class="link-volver">← Volver al inicio</span>
+  </div>
+
+  <div id="pantallaLogin" class="oculto">
+    <input type="text" id="loginUsuario" placeholder="Usuario">
+    <input type="password" id="loginPass" placeholder="Contraseña">
+    <button id="btnDesbloquear" class="btn-accion">DESBLOQUEAR</button>
+    <span id="volverBienvenidaLog" class="link-volver">← Volver al inicio</span>
+  </div>
+
+  <div id="pantallaBoveda" class="oculto">
+    <p id="saludo" style="font-size: 12px; color: #6D4AFF; margin-bottom: 12px; text-align: center;"></p>
+    <input type="text" id="cajaContrasena" placeholder="Click en generar..." readonly>
+    <button id="botonGenerar" class="btn-accion">GENERAR CLAVE</button>
+    <button id="botonGuardar" style="background:transparent; color:#E0E0E6; border:1px solid #3E3E55; margin-top:8px; width:100%; padding:10px; border-radius:8px; cursor:pointer;">GUARDAR EN MI LISTA</button>
+    
+    <div id="boveda" style="margin-top:20px;">
+      <ul id="listaContrasenas" style="padding:0;"></ul>
+    </div>
+    
+    <button id="btnLogOut" style="background:none; border:none; color:#8C8C9A; font-size:11px; width:100%; margin-top:20px; cursor:pointer; text-decoration: underline;">Cerrar sesión</button>
   </div>
 
   <script src="popup.js"></script>
