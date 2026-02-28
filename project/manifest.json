@@ -1,9 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Gradiant PassVault",
+  "name": "Vault Keys",
   "version": "1.0",
-  "description": "Gestor universal de contraseñas",
+  "description": "Gestor de contraseñas Zero-Knowledge y Offline-First.",
+  "permissions": [
+    "storage",
+    "privacy"
+  ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "Abrir Vault Keys"
   }
 }

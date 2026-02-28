@@ -4,9 +4,17 @@
   <meta charset="utf-8">
   <style>
     /* Estilos generales y Reset */
-    body { width: 320px; padding: 25px; font-family: 'Segoe UI', sans-serif; background-color: #12121A; color: #FFFFFF; margin: 0; }
+    body { 
+      width: 320px; 
+      padding: 25px; 
+      font-family: 'Segoe UI', sans-serif; 
+      background-color: #12121A; 
+      color: #FFFFFF; 
+      margin: 0; 
+      box-sizing: border-box;
+    }
     
-    /* Título (Huevo de pascua totalmente oculto, sin brillos ni manita) */
+    /* Título (Huevo de pascua ninja) */
     h2 { 
       text-align: center; 
       color: #E0E0E6; 
@@ -15,48 +23,88 @@
       user-select: none; 
       cursor: default; 
     }
-    .subtitulo-logo { text-align: center; font-size: 10px; color: #6D4AFF; margin-bottom: 30px; font-weight: bold; letter-spacing: 1px; }
-
-    /* Pantalla de Bienvenida (SÍ/NO) */
-    .pregunta-container { text-align: center; }
-    .texto-pregunta { font-size: 15px; color: #8C8C9A; margin-bottom: 20px; }
-    .fila-botones { display: flex; gap: 15px; }
-    
-    .btn-opcion {
-      flex: 1; padding: 25px 0; border-radius: 12px; font-size: 20px; font-weight: 800;
-      cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; 
-      align-items: center; border: 2px solid transparent;
+    .subtitulo-logo { 
+      text-align: center; 
+      font-size: 10px; 
+      color: #6D4AFF; 
+      margin-bottom: 20px; 
+      font-weight: bold; 
+      letter-spacing: 1px; 
     }
 
-    /* Botón SÍ (Login) */
+    /* --- PANTALLA DE BIENVENIDA Y BOTONES SÍ/NO --- */
+    .pregunta-container { text-align: center; }
+    .texto-pregunta { font-size: 15px; color: #8C8C9A; margin-bottom: 20px; }
+    
+    .fila-botones { 
+      display: flex; 
+      flex-direction: row; 
+      justify-content: space-between; 
+      gap: 15px; 
+      width: 100%; 
+    }
+    
+    .btn-opcion {
+      flex: 1; 
+      padding: 20px 0; 
+      border-radius: 12px; 
+      font-size: 20px; 
+      font-weight: 800;
+      cursor: pointer; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
     .btn-si { background-color: rgba(109, 74, 255, 0.1); color: #6D4AFF; border-color: #6D4AFF; }
     .btn-si:hover { background-color: #6D4AFF; color: white; transform: scale(1.05); }
 
-    /* Botón NO (Registro) */
     .btn-no { background-color: rgba(0, 200, 83, 0.1); color: #00C853; border-color: #00C853; }
     .btn-no:hover { background-color: #00C853; color: white; transform: scale(1.05); }
 
     .subtexto-btn { font-size: 10px; font-weight: normal; margin-top: 5px; text-transform: uppercase; opacity: 0.8; }
 
-    /* Inputs y botones de acción */
+    /* --- INPUTS Y RESTO DE BOTONES --- */
     .oculto { display: none; }
     input { 
       width: 100%; padding: 12px; margin-bottom: 12px; box-sizing: border-box; text-align: center; 
       background-color: #1C1C28; color: #A370F7; border: 1px solid #3E3E55; border-radius: 8px; outline: none; 
     }
     input:focus { border-color: #6D4AFF; }
-    .btn-accion { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background-color: #6D4AFF; color: white; transition: 0.2s; }
+    
+    .btn-accion { 
+      width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; 
+      cursor: pointer; background-color: #6D4AFF; color: white; transition: 0.2s; 
+    }
     .btn-accion:hover { background-color: #5B3DE6; }
     
-    /* Lista de la bóveda */
-    li { background: #1C1C28; padding: 10px; margin-bottom: 6px; border-radius: 6px; color: #A370F7; font-family: monospace; border-left: 3px solid #6D4AFF; list-style: none; font-size: 13px; }
-    .link-volver { display: block; text-align: center; margin-top: 20px; font-size: 13px; color: #8C8C9A; cursor: pointer; text-decoration: underline; }
+    /* --- BÓVEDA --- */
+    li { 
+      background: #1C1C28; padding: 10px; margin-bottom: 6px; border-radius: 6px; 
+      color: #A370F7; font-family: monospace; border-left: 3px solid #6D4AFF; 
+      list-style: none; font-size: 13px; 
+    }
+    .link-volver { 
+      display: block; text-align: center; margin-top: 20px; font-size: 13px; 
+      color: #8C8C9A; cursor: pointer; text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
 
-  <h2 id="btnResetTotal">VAULT KEYS</h2>
+  <h2 id="btnResetTotal" title=" ">VAULT KEYS</h2>
   <div class="subtitulo-logo">SEGURIDAD CRIPTOGRÁFICA</div>
+
+  <div id="bannerPredeterminado" style="background: rgba(109, 74, 255, 0.15); border: 1px solid #6D4AFF; border-radius: 8px; padding: 12px; margin-bottom: 20px; text-align: center; display: none;">
+    <p style="font-size: 12px; margin: 0 0 10px 0; color: #E0E0E6;">¿Establecer Vault Keys como tu gestor principal?</p>
+    <div style="display: flex; gap: 10px;">
+      <button id="btnAceptarPredeterminado" style="flex: 1; background: #6D4AFF; color: white; border: none; border-radius: 6px; padding: 6px; font-weight: bold; cursor: pointer;">Aceptar</button>
+      <button id="btnIgnorarPredeterminado" style="flex: 1; background: transparent; color: #8C8C9A; border: 1px solid #3E3E55; border-radius: 6px; padding: 6px; cursor: pointer;">Más tarde</button>
+    </div>
+  </div>
   
   <div id="pantallaBienvenida" class="pregunta-container">
     <div class="texto-pregunta">¿Ya tienes una cuenta?</div>
