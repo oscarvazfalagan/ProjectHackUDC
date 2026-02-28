@@ -3,149 +3,58 @@
 <head>
   <meta charset="utf-8">
   <style>
-    /* Estilos generales y Reset */
-    body { 
-      width: 320px; 
-      padding: 25px; 
-      font-family: 'Segoe UI', sans-serif; 
-      background-color: #12121A; 
-      color: #FFFFFF; 
-      margin: 0; 
-      box-sizing: border-box;
-    }
-    
-    /* Título (Huevo de pascua ninja) */
-    h2 { 
-      text-align: center; 
-      color: #E0E0E6; 
-      margin-bottom: 5px; 
-      letter-spacing: 3px; 
-      user-select: none; 
-      cursor: default; 
-    }
-    .subtitulo-logo { 
-      text-align: center; 
-      font-size: 10px; 
-      color: #6D4AFF; 
-      margin-bottom: 20px; 
-      font-weight: bold; 
-      letter-spacing: 1px; 
-    }
-
-    /* --- PANTALLA DE BIENVENIDA Y BOTONES SÍ/NO --- */
-    .pregunta-container { text-align: center; }
-    .texto-pregunta { font-size: 15px; color: #8C8C9A; margin-bottom: 20px; }
-    
-    .fila-botones { 
-      display: flex; 
-      flex-direction: row; 
-      justify-content: space-between; 
-      gap: 15px; 
-      width: 100%; 
-    }
-    
-    .btn-opcion {
-      flex: 1; 
-      padding: 20px 0; 
-      border-radius: 12px; 
-      font-size: 20px; 
-      font-weight: 800;
-      cursor: pointer; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: center;
-      border: 2px solid transparent;
-      transition: all 0.2s ease;
-    }
-
-    .btn-si { background-color: rgba(109, 74, 255, 0.1); color: #6D4AFF; border-color: #6D4AFF; }
-    .btn-si:hover { background-color: #6D4AFF; color: white; transform: scale(1.05); }
-
-    .btn-no { background-color: rgba(0, 200, 83, 0.1); color: #00C853; border-color: #00C853; }
-    .btn-no:hover { background-color: #00C853; color: white; transform: scale(1.05); }
-
-    .subtexto-btn { font-size: 10px; font-weight: normal; margin-top: 5px; text-transform: uppercase; opacity: 0.8; }
-
-    /* --- INPUTS Y RESTO DE BOTONES --- */
+    body { width: 300px; padding: 20px; font-family: sans-serif; background: #12121A; color: white; text-align: center; }
     .oculto { display: none; }
-    input { 
-      width: 100%; padding: 12px; margin-bottom: 12px; box-sizing: border-box; text-align: center; 
-      background-color: #1C1C28; color: #A370F7; border: 1px solid #3E3E55; border-radius: 8px; outline: none; 
-    }
-    input:focus { border-color: #6D4AFF; }
+    h2 { letter-spacing: 2px; color: #E0E0E6; cursor: pointer; }
+    .sub { font-size: 10px; color: #6D4AFF; margin-bottom: 20px; font-weight: bold; }
     
-    .btn-accion { 
-      width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; 
-      cursor: pointer; background-color: #6D4AFF; color: white; transition: 0.2s; 
-    }
-    .btn-accion:hover { background-color: #5B3DE6; }
+    input { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; background: #1C1C28; border: 1px solid #3E3E55; color: #A370F7; border-radius: 5px; outline: none; }
     
-    /* --- BÓVEDA --- */
-    li { 
-      background: #1C1C28; padding: 10px; margin-bottom: 6px; border-radius: 6px; 
-      color: #A370F7; font-family: monospace; border-left: 3px solid #6D4AFF; 
-      list-style: none; font-size: 13px; 
-    }
-    .link-volver { 
-      display: block; text-align: center; margin-top: 20px; font-size: 13px; 
-      color: #8C8C9A; cursor: pointer; text-decoration: underline; 
-    }
+    button { width: 100%; padding: 10px; margin-bottom: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    .btn-si { background: #6D4AFF; color: white; }
+    .btn-no { background: transparent; border: 1px solid #3E3E55; color: #E0E0E6; }
+    
+    ul { padding: 0; text-align: left; }
+    li { background: #1C1C28; padding: 10px; border-radius: 5px; margin-bottom: 5px; list-style: none; border-left: 3px solid #6D4AFF; font-size: 12px; }
+    .link { font-size: 12px; color: #8C8C9A; cursor: pointer; text-decoration: underline; display: block; margin-top: 10px; }
   </style>
 </head>
 <body>
+  <h2 id="btnResetTotal">VAULT KEYS</h2>
+  <div class="sub">SEGURIDAD CRIPTOGRÁFICA</div>
 
-  <h2 id="btnResetTotal" title=" ">VAULT KEYS</h2>
-  <div class="subtitulo-logo">SEGURIDAD CRIPTOGRÁFICA</div>
-
-  <div id="bannerPredeterminado" style="background: rgba(109, 74, 255, 0.15); border: 1px solid #6D4AFF; border-radius: 8px; padding: 12px; margin-bottom: 20px; text-align: center; display: none;">
-    <p style="font-size: 12px; margin: 0 0 10px 0; color: #E0E0E6;">¿Establecer Vault Keys como tu gestor principal?</p>
-    <div style="display: flex; gap: 10px;">
-      <button id="btnAceptarPredeterminado" style="flex: 1; background: #6D4AFF; color: white; border: none; border-radius: 6px; padding: 6px; font-weight: bold; cursor: pointer;">Aceptar</button>
-      <button id="btnIgnorarPredeterminado" style="flex: 1; background: transparent; color: #8C8C9A; border: 1px solid #3E3E55; border-radius: 6px; padding: 6px; cursor: pointer;">Más tarde</button>
-    </div>
-  </div>
-  
-  <div id="pantallaBienvenida" class="pregunta-container">
-    <div class="texto-pregunta">¿Ya tienes una cuenta?</div>
-    <div class="fila-botones">
-      <button id="btnIrALogin" class="btn-opcion btn-si">
-        SÍ <span class="subtexto-btn">Entrar</span>
-      </button>
-      <button id="btnIrARegistro" class="btn-opcion btn-no">
-        NO <span class="subtexto-btn">Crear</span>
-      </button>
-    </div>
+  <div id="pantallaBienvenida">
+    <p>¿YA TIENES CUENTA?</p>
+    <button id="btnIrALogin" class="btn-si">SÍ</button>
+    <button id="btnIrARegistro" class="btn-no">NO</button>
   </div>
 
   <div id="pantallaRegistro" class="oculto">
     <input type="text" id="regUsuario" placeholder="Usuario">
     <input type="password" id="regPass" placeholder="Clave Maestra">
-    <input type="password" id="regPassRepetir" placeholder="Repite clave">
-    <button id="btnRegistrar" class="btn-accion">CREAR CUENTA</button>
-    <span id="volverBienvenidaReg" class="link-volver">← Volver al inicio</span>
+    <input type="password" id="regPassRepetir" placeholder="Repetir Clave">
+    <button id="btnRegistrar" class="btn-si">CREAR</button>
+    <span id="volverBienvenidaReg" class="link">Volver</span>
   </div>
 
   <div id="pantallaLogin" class="oculto">
     <input type="text" id="loginUsuario" placeholder="Usuario">
-    <input type="password" id="loginPass" placeholder="Contraseña">
-    <button id="btnDesbloquear" class="btn-accion">DESBLOQUEAR</button>
-    <span id="volverBienvenidaLog" class="link-volver">← Volver al inicio</span>
+    <input type="password" id="loginPass" placeholder="Clave">
+    <button id="btnDesbloquear" class="btn-si">ENTRAR</button>
+    <span id="volverBienvenidaLog" class="link">Volver</span>
   </div>
 
   <div id="pantallaBoveda" class="oculto">
-    <p id="saludo" style="font-size: 12px; color: #6D4AFF; margin-bottom: 12px; text-align: center;"></p>
-    <input type="text" id="cajaContrasena" placeholder="Click en generar..." readonly>
-    <button id="botonGenerar" class="btn-accion">GENERAR CLAVE</button>
-    <button id="botonGuardar" style="background:transparent; color:#E0E0E6; border:1px solid #3E3E55; margin-top:8px; width:100%; padding:10px; border-radius:8px; cursor:pointer;">GUARDAR EN MI LISTA</button>
-    
-    <div id="boveda" style="margin-top:20px;">
-      <ul id="listaContrasenas" style="padding:0;"></ul>
-    </div>
-    
-    <button id="btnLogOut" style="background:none; border:none; color:#8C8C9A; font-size:11px; width:100%; margin-top:20px; cursor:pointer; text-decoration: underline;">Cerrar sesión</button>
+    <p id="saludo" style="font-size: 11px; color: #6D4AFF;"></p>
+    <input type="text" id="siteName" placeholder="Web (ej: Google)">
+    <input type="text" id="siteUser" placeholder="Usuario / Email">
+    <input type="text" id="cajaContrasena" placeholder="Contraseña..." readonly>
+    <button id="botonGenerar" class="btn-si">GENERAR</button>
+    <button id="botonGuardar" class="btn-no">GUARDAR</button>
+    <ul id="listaContrasenas"></ul>
+    <span id="btnLogOut" class="link">Cerrar Sesión</span>
   </div>
 
   <script src="popup.js"></script>
 </body>
-</html>
+</html>|
